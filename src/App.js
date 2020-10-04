@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useMutation } from 'react-query';
+import { Button, Container, Div, Input, Text } from 'atomize';
+import { suitabilityConversation } from './AppQuery';
+import Loading from './components/Loading';
 
-function App() {
+const App = () => {
+  const [fetchSuitability, { data, error, isLoading, isError }] = useMutation(suitabilityConversation)
+
+  useEffect(() => {
+    fetchSuitability()
+  }, [fetchSuitability])
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  console.log(data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container d='flex' align='center' justify='center' flexDir='column'>
+      <Text tag='h3' textSize='display1' m={{ y: '2rem' }} textColor='brand900'>
+        Suitability Warren
+      </Text>
+
+      <Div shadow='4' p='2rem' rounded='xl' d='flex' align='center' justify='space-between' flexDir='column'>
+        <Text>Pergunta aqui?</Text>
+
+        <Input placeholder="Basic Input" m={{ t: '2rem' }} rounded='circle' w='100%'/>
+
+        <Button bg='brand800' w='100%' rounded='circle' m={{ t: '2rem' }}>Próxima</Button>
+      </Div>
+    </Container>
   );
-}
+};
 
 export default App;
