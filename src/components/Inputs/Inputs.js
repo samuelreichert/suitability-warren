@@ -27,6 +27,7 @@ const Inputs = ({ answers, id, inputs, onClickNext, setAnswers }) => {
             rounded='circle'
             onChange={onChangeInput}
             onKeyPress={onKeyPress}
+            m={{ t: '1rem' }}
           />
         ))
       }
