@@ -11,7 +11,7 @@ const Inputs = ({ answers, id, inputs, onClickNext, setAnswers }) => {
   };
 
   const onKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !!answers[id]) {
       onClickNext(id);
     }
   };
